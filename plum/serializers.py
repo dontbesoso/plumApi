@@ -20,3 +20,8 @@ class LogowaniaSerializer(serializers.ModelSerializer):
     class Meta:
         model=Logowania 
         fields=('id', 'userid', 'userName', 'timeIn', 'type', 'prevId', 'sessionId')
+
+class PracownicySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Pracownicy 
+        fields=('id', 'name', 'cardId', 'description', 'hasAdmin')

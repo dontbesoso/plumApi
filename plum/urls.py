@@ -6,4 +6,6 @@ from django.conf import settings
 
 urlpatterns=[
     url(r'^logowania$', views.logowaniaApi),
+    url(r'^pracownicy$', views.pracownicyApi),
+    
 ] 
