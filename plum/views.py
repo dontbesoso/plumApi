@@ -8,11 +8,32 @@ from plum.models import Logowania, Pracownicy
 from plum.serializers import LogowaniaSerializer, PracownicySerializer
 
 @csrf_exempt
-def logowaniaApi(request,id=0):
+def logowaniaApi(request):
     if request.method=='GET':
-        logowania = Logowania.objects.all()
+        
+        try:
+            useridParam = request.GET['userid']
+        except:
+            useridParam = None
+
+        """
+        try:
+            thevariable
+        except NameError:
+            print("well, it WASN'T defined after all!")
+        else:
+            print("sure, it was defined.")
+        """
+
+
+        if useridParam is not None:
+            logowania = Logowania.objects.filter(userid=useridParam)
+        else:
+            logowania = Logowania.objects.all()
+
         logowania_serializer=LogowaniaSerializer(logowania,many=True)
         return JsonResponse(logowania_serializer.data,safe=False)
+    
     elif request.method=='POST':
         logowania=JSONParser().parse(request)
         logowania_serializer=LogowaniaSerializer(data=logowania)
