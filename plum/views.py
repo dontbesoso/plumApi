@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models.functions import Lower
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -13,9 +14,10 @@ def logowaniaApi(request):
         
         try:
             useridParam = request.GET['userid']
+            typeParam =  request.GET['type']
         except:
             useridParam = None
-
+            typeParam = None
         """
         try:
             thevariable
@@ -27,7 +29,7 @@ def logowaniaApi(request):
 
 
         if useridParam is not None:
-            logowania = Logowania.objects.filter(userid=useridParam)
+            logowania = Logowania.objects.filter(userid=useridParam, type=typeParam).order_by(Lower('id').desc())[:1]
         else:
             logowania = Logowania.objects.all()
 
@@ -44,6 +46,16 @@ def logowaniaApi(request):
 
 def pracownicyApi(request,id=0):
     if request.method=='GET':
-        pracownicy = Pracownicy.objects.all()
+
+        try:
+            useridParam = request.GET['cardId']
+        except:
+            useridParam = None
+                  
+        if useridParam is not None:
+            pracownicy = Pracownicy.objects.filter(cardId=useridParam).order_by(Lower('id').desc())[:1]
+        else:
+            pracownicy = Pracownicy.objects.all()
+
         pracownicy_serializer=PracownicySerializer(pracownicy,many=True)
         return JsonResponse(pracownicy_serializer.data,safe=False)

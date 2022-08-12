@@ -17,7 +17,7 @@ class Pracownicy(models.Model):
 
 class Logowania(models.Model):
     id = models.AutoField(primary_key=True)
-    userid = models.IntegerField()
+    userid = models.CharField(max_length=10)
     userName = models.CharField(max_length=64)
     timeIn = models.CharField(max_length=19)
     type = models.CharField(max_length=16)
@@ -27,6 +27,6 @@ class Logowania(models.Model):
 class Pracownicy(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=64)
-    cardId = models.IntegerField()
+    cardId = models.CharField(max_length=10)
     description = models.CharField(max_length=255)
     hasAdmin = models.BooleanField()
