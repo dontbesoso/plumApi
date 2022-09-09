@@ -14,8 +14,7 @@ from pathlib import Path
 import os
 
 BASE_DIR=Path(__file__).resolve(strict=True).parent.parent
-MEDIA_URL='/Photos/'
-MEDIA_ROOT=os.path.join(BASE_DIR,"Photos")
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,14 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@oxx-o(4f=mxha%-tlv97)x9m7x_fw=(@*k=*29q%r7c8*)%-&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    '10.10.5.255',
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition 
+# 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,9 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
         'NAME': 'Adam_Asprova',
-        'USER':'amada',
-        'PASSWORD':'amada',
-        'HOST':'metrix-sql',
+        #'USER':'amada',
+        #'PASSWORD':'amada',
+        'Trusted_Connection': 'yes',
+        'HOST':  'AD-ADAM\SQLEXPRESS',
         'OPTIONS':{
             'driver':'ODBC Driver 17 for SQL Server',
             'isolation_level':'READ UNCOMMITTED' #to prevent deadlocks

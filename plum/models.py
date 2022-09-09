@@ -23,6 +23,7 @@ class Logowania(models.Model):
     type = models.CharField(max_length=16)
     prevId = models.IntegerField()
     sessionId = models.IntegerField()
+    machineName = models.CharField(max_length=64, default="")
     
 class Pracownicy(models.Model):
     id = models.AutoField(primary_key=True)

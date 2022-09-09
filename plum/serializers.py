@@ -19,7 +19,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class LogowaniaSerializer(serializers.ModelSerializer): 
     class Meta:
         model=Logowania 
-        fields=('id', 'userid', 'userName', 'timeIn', 'type', 'prevId', 'sessionId')
+        fields=('id', 'userid', 'userName', 'timeIn', 'type', 'prevId', 'sessionId', 'machineName')
     
     
 

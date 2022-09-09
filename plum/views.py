@@ -14,10 +14,15 @@ def logowaniaApi(request):
         
         try:
             useridParam = request.GET['userid']
-            typeParam =  request.GET['type']
         except:
             useridParam = None
+            
+        try: 
+            typeParam =  request.GET['type']
+        except:
             typeParam = None
+
+        
         """
         try:
             thevariable
@@ -28,8 +33,11 @@ def logowaniaApi(request):
         """
 
 
-        if useridParam is not None:
+        if ((useridParam is not None) and (typeParam is not None)):
             logowania = Logowania.objects.filter(userid=useridParam, type=typeParam).order_by(Lower('id').desc())[:1]
+        elif ((useridParam is not None) and (typeParam is None)):
+            print("Wywołano -- ostatnie --")
+            logowania = Logowania.objects.filter(userid=useridParam).order_by('-id')[:1]
         else:
             logowania = Logowania.objects.all()
 
