@@ -31,3 +31,5 @@ class Pracownicy(models.Model):
     cardId = models.CharField(max_length=10)
     description = models.CharField(max_length=255)
     hasAdmin = models.BooleanField()
+    password = models.CharField(max_length=64)
+    passdate = models.CharField(max_length=10)
